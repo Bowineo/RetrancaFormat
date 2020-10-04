@@ -13,6 +13,7 @@ namespace RetrancaFormat
 
         public bool PrimeiroChar = true;
 
+        #region Eventos
         private void BtnEscolhePath_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog1.ShowDialog();
@@ -82,7 +83,9 @@ namespace RetrancaFormat
 
         private void BtnExpande_Click(object sender, EventArgs e)
         { Expandir(); }
+        #endregion
 
+        #region Funções
         public void Expandir()
         {
             if (btnExpande.Text == "<") { btnExpande.Text = ">"; Form.ActiveForm.Size = new Size(520, 604); }
@@ -350,5 +353,6 @@ namespace RetrancaFormat
             }
             return lista.ToArray();
         }
+        #endregion
     }
 }

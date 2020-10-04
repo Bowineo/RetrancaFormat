@@ -78,7 +78,7 @@
             // 
             this.lblSufixo.AutoSize = true;
             this.lblSufixo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSufixo.Location = new System.Drawing.Point(8, 426);
+            this.lblSufixo.Location = new System.Drawing.Point(8, 427);
             this.lblSufixo.Name = "lblSufixo";
             this.lblSufixo.Size = new System.Drawing.Size(105, 18);
             this.lblSufixo.TabIndex = 2;
@@ -99,9 +99,9 @@
             this.lblSaida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSaida.Location = new System.Drawing.Point(8, 478);
             this.lblSaida.Name = "lblSaida";
-            this.lblSaida.Size = new System.Drawing.Size(261, 18);
+            this.lblSaida.Size = new System.Drawing.Size(257, 18);
             this.lblSaida.TabIndex = 4;
-            this.lblSaida.Text = "Escolha o local para gravar  o arquivo:";
+            this.lblSaida.Text = "Escolha o local para gravar o arquivo:";
             // 
             // btnEscolhePath
             // 
@@ -137,7 +137,7 @@
             this.btnGravarArquivo.Enabled = false;
             this.btnGravarArquivo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnGravarArquivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGravarArquivo.Location = new System.Drawing.Point(140, 531);
+            this.btnGravarArquivo.Location = new System.Drawing.Point(140, 532);
             this.btnGravarArquivo.Name = "btnGravarArquivo";
             this.btnGravarArquivo.Size = new System.Drawing.Size(83, 25);
             this.btnGravarArquivo.TabIndex = 5;

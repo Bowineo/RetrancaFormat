@@ -319,12 +319,15 @@ namespace RetrancaFormat
 
         public static string[] RetiraNomesInicio(string[] entrada)
         {
-
             for (int i = 0; i < entrada.Length; i++)
             {
                 if (entrada[i].Length >= 4)
                 {
-                    if (entrada[i].Substring(0, 3) == "PE_" || entrada[i].Substring(0, 4) == "PASS" || entrada[i].Substring(0, 4) == "OSVA" || entrada[i].Substring(0, 5) == "CHAMA")
+                    if (entrada[i].Substring(0, 3) == "PE_" || entrada[i].Substring(0, 4) == "PASS" || entrada[i].Substring(0, 4) == "OSVA" )
+                    {
+                        entrada[i] = "";
+                    }
+                    if (entrada[i].Length >= 5 && entrada[i].Substring(0, 5) == "CHAMA")
                     {
                         entrada[i] = "";
                     }
@@ -336,7 +339,6 @@ namespace RetrancaFormat
 
             }
             return entrada;
-
         }
 
         public static string[] RetiraLinhasVazias(string[] entrada)

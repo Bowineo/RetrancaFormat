@@ -158,6 +158,7 @@
             // 
             // TbListaRetirar
             // 
+            this.TbListaRetirar.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.TbListaRetirar.Location = new System.Drawing.Point(381, 35);
             this.TbListaRetirar.Multiline = true;
             this.TbListaRetirar.Name = "TbListaRetirar";

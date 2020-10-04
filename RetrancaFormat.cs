@@ -326,7 +326,7 @@ namespace RetrancaFormat
             {
                 if (entrada[i].Length >= 4)
                 {
-                    if (entrada[i].Substring(0, 3) == "PE_" || entrada[i].Substring(0, 4) == "PASS" || entrada[i].Substring(0, 4) == "OSVA" )
+                    if (entrada[i].Substring(0, 3) == "PE_" || entrada[i].Substring(0, 4) == "PASS" || entrada[i].Substring(0, 4) == "OSVA")
                     {
                         entrada[i] = "";
                     }

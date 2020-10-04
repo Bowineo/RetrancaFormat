@@ -1,13 +1,3 @@
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Debug\RetrancaFormat.exe.config
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Debug\RetrancaFormat.exe
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Debug\RetrancaFormat.pdb
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csprojAssemblyReference.cache
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.Properties.Resources.resources
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csproj.GenerateResource.cache
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csproj.CoreCompileInputs.cache
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.exe
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.pdb
-C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.RetrancaFormat.resources
 C:\Users\Pedro Reis\Downloads\RetrancaFormat\RetrancaFormat\bin\Debug\RetrancaFormat.exe.config
 C:\Users\Pedro Reis\Downloads\RetrancaFormat\RetrancaFormat\bin\Debug\RetrancaFormat.exe
 C:\Users\Pedro Reis\Downloads\RetrancaFormat\RetrancaFormat\bin\Debug\RetrancaFormat.pdb
@@ -18,3 +8,13 @@ C:\Users\Pedro Reis\Downloads\RetrancaFormat\RetrancaFormat\obj\Debug\RetrancaFo
 C:\Users\Pedro Reis\Downloads\RetrancaFormat\RetrancaFormat\obj\Debug\RetrancaFormat.csproj.CoreCompileInputs.cache
 C:\Users\Pedro Reis\Downloads\RetrancaFormat\RetrancaFormat\obj\Debug\RetrancaFormat.exe
 C:\Users\Pedro Reis\Downloads\RetrancaFormat\RetrancaFormat\obj\Debug\RetrancaFormat.pdb
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Debug\RetrancaFormat.exe.config
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Debug\RetrancaFormat.exe
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Debug\RetrancaFormat.pdb
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csprojAssemblyReference.cache
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.RetrancaFormat.resources
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.Properties.Resources.resources
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csproj.GenerateResource.cache
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csproj.CoreCompileInputs.cache
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.exe
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.pdb

@@ -10,7 +10,7 @@ namespace RetrancaFormat
     {
         public RetrancaFormat()
         { InitializeComponent(); }
-        public bool Chave = true;
+        public bool PrimeiroChar = true;
 
         private void BtnEscolhePath_Click(object sender, EventArgs e)
         {
@@ -43,25 +43,18 @@ namespace RetrancaFormat
             {
                 tbInputTexto.Text = RemoveLinhas(ReitarItensListados(GetNomes(tbInputTexto.Text), Properties.Settings.Default.ListaRetirar), tbInputTexto.SelectedText);
 
-                if (tbInputTexto.Text.Trim().EndsWith("_"))
-                {
-                    tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0);
-                }
+                if (LinhaTexto(GetNomes(tbInputTexto.Text), tbInputTexto.SelectedText).EndsWith("_") && !PrimeiroChar)
+                { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
 
                 btnGravarArquivo.Enabled = true;
-
             }
             else { btnGravarArquivo.Enabled = false; }
-            if (Chave)
+            if (PrimeiroChar && tbInputTexto.Text.Trim().Length <= 1)
             {
                 tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0);
-                Chave = false;
+                PrimeiroChar = false;
             }
-            if (tbInputTexto.Text == "")
-            {
-                Chave = true;
-            }
-
+            if (tbInputTexto.Text == "") { PrimeiroChar = true; }
         }
 
         private void RetrancaFormat_Load(object sender, EventArgs e)
@@ -75,31 +68,24 @@ namespace RetrancaFormat
         {
             System.Collections.Specialized.StringCollection colecao = new System.Collections.Specialized.StringCollection();
             colecao.AddRange(GetNome(TbListaRetirar.Text));
-
             Properties.Settings.Default.ListaRetirar = colecao;
-
             Properties.Settings.Default.Save();
             TbListaRetirar.Text = ArrayToString(Properties.Settings.Default.ListaRetirar);
             DialogResult result = MessageBox.Show("A lista de exclusão foi salva.");
             if (result == DialogResult.OK)
             {
                 tbInputTexto.Text = RemoveLinhas(ReitarItensListados(GetNomes(tbInputTexto.Text), Properties.Settings.Default.ListaRetirar), tbInputTexto.SelectedText);
+                Expandir();
             }
         }
 
         private void BtnExpande_Click(object sender, EventArgs e)
-        {
-            if (btnExpande.Text == "<")
-            {
-                btnExpande.Text = ">";
-                Form.ActiveForm.Size = new Size(520, 604);
-            }
-            else
-            {
-                btnExpande.Text = "<";
-                Form.ActiveForm.Size = new Size(390, 604);
-            }
+        { Expandir(); }
 
+        public void Expandir()
+        {
+            if (btnExpande.Text == "<") { btnExpande.Text = ">"; Form.ActiveForm.Size = new Size(520, 604); }
+            else { btnExpande.Text = "<"; Form.ActiveForm.Size = new Size(390, 604); }
         }
 
         public static string[] ReitarItensListados(string[] entrada, System.Collections.Specialized.StringCollection ListaRetirar)
@@ -139,7 +125,6 @@ namespace RetrancaFormat
             string[] str = entrada.Split('\r');
             for (int i = 0; i < str.Length; i++)
             { str[i] = RemoveSpecialCharacters(str[i].Replace("\n", "")); }
-            //   str = RetiraUnderlineFinal(str);
             str = RetiraNomesInicio(str);
             str = SeparaBlocos(str);
             return str;
@@ -214,7 +199,7 @@ namespace RetrancaFormat
             {
                 if (tbPathEscolhido.Text != "" && TextoGravar.Length != 0 && tbPathEscolhido.Text != @"C:\")
                 {
-                    TextoGravar = RetiraUnderlineFinal(TextoGravar);
+                    TextoGravar = RetiraUnderlineFinal(RetiraLinhasVazias(TextoGravar));
                     using (StreamWriter strW = new StreamWriter(fileName, false))
                     {
                         foreach (string linha in TextoGravar)
@@ -243,6 +228,14 @@ namespace RetrancaFormat
                 MessageBox.Show("Erro ao gravar arquivo" + e.ToString());
             }
         }
+
+        public string LinhaTexto(string[] entrada, string select)
+        {
+            String[] linhas = entrada;
+            System.Collections.ArrayList lista = new System.Collections.ArrayList(linhas);
+            return linhas[lista.IndexOf(select)];
+        }
+
 
         public string RemoveLinhas(string[] lines, string TextSelecionado)
         {
@@ -346,6 +339,15 @@ namespace RetrancaFormat
 
         }
 
+        public static string[] RetiraLinhasVazias(string[] entrada)
+        {
+            List<string> lista = new List<string>();
+            for (int i = 0; i < entrada.Length; i++)
+            {
+                if (entrada[i] != "") { lista.Add(entrada[i]); }
+            }
+            return lista.ToArray();
+        }
     }
 
 

@@ -10,6 +10,7 @@ namespace RetrancaFormat
     {
         public RetrancaFormat()
         { InitializeComponent(); }
+        public bool Chave = true;
 
         private void BtnEscolhePath_Click(object sender, EventArgs e)
         {
@@ -41,9 +42,26 @@ namespace RetrancaFormat
             if (tbInputTexto.Text != "" && tbInputTexto.Text.Trim().Length > 0)
             {
                 tbInputTexto.Text = RemoveLinhas(ReitarItensListados(GetNomes(tbInputTexto.Text), Properties.Settings.Default.ListaRetirar), tbInputTexto.SelectedText);
+
+                if (tbInputTexto.Text.Trim().EndsWith("_"))
+                {
+                    tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0);
+                }
+
                 btnGravarArquivo.Enabled = true;
+
             }
             else { btnGravarArquivo.Enabled = false; }
+            if (Chave)
+            {
+                tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0);
+                Chave = false;
+            }
+            if (tbInputTexto.Text == "")
+            {
+                Chave = true;
+            }
+
         }
 
         private void RetrancaFormat_Load(object sender, EventArgs e)
@@ -121,7 +139,7 @@ namespace RetrancaFormat
             string[] str = entrada.Split('\r');
             for (int i = 0; i < str.Length; i++)
             { str[i] = RemoveSpecialCharacters(str[i].Replace("\n", "")); }
-            str = RetiraUnderlineFinal(str);
+            //   str = RetiraUnderlineFinal(str);
             str = RetiraNomesInicio(str);
             str = SeparaBlocos(str);
             return str;
@@ -196,11 +214,11 @@ namespace RetrancaFormat
             {
                 if (tbPathEscolhido.Text != "" && TextoGravar.Length != 0 && tbPathEscolhido.Text != @"C:\")
                 {
-                    // Create a StreamWriter from FileStream  
+                    TextoGravar = RetiraUnderlineFinal(TextoGravar);
                     using (StreamWriter strW = new StreamWriter(fileName, false))
                     {
                         foreach (string linha in TextoGravar)
-                        { strW.Write(linha + "\r\n"); }
+                        { strW.Write(ReduzUnderline(linha) + "\r\n"); }
                         strW.Close();
                         MessageBox.Show("Concluído!");
                         tbInputTexto.Text = "";
@@ -249,13 +267,11 @@ namespace RetrancaFormat
             tbPrefixo.Text = produto + DateTime.Now.ToString("_dd_MM");
         }
 
-        public static string RemoveSpecialCharacters(string text)
+        public string RemoveSpecialCharacters(string text)
         {
             string ret;
             text = text.Replace("/", "_").Replace("-", "_").Replace("+", "_").Replace("(", "_").Replace(")", "_").Replace("_", " ");
-
             ret = System.Text.RegularExpressions.Regex.Replace(text, @"[^0-9a-zA-ZéúíóáÉÚÍÓÁèùìòàÈÙÌÒÀõãñÕÃÑêûîôâÊÛÎÔÂëÿüïöäËYÜÏÖÄçÇ\s]+?", string.Empty);
-
             ret = ReduzUnderline(RemoverAcentos(ret.Replace(" ", "_")));
             return ret;
         }
@@ -315,17 +331,21 @@ namespace RetrancaFormat
             {
                 if (entrada[i].Length >= 4)
                 {
-                    if (entrada[i].Substring(0, 3).ToUpper() == "PE_" || entrada[i].Substring(0, 4).ToUpper() == "PASS")
+                    if (entrada[i].Substring(0, 3) == "PE_" || entrada[i].Substring(0, 4) == "PASS" || entrada[i].Substring(0, 4) == "OSVA")
                     {
                         entrada[i] = "";
                     }
-
+                    if (entrada[i].Length >= 7 && (entrada[i].Substring(0, 7) == "OSVALDO" || entrada[i].Substring(0, 7) == "ESPORTE" || entrada[i].Substring(0, 7) == "VINHETA"))
+                    {
+                        entrada[i] = "";
+                    }
                 }
 
             }
             return entrada;
 
         }
+
     }
 
 

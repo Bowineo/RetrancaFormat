@@ -43,6 +43,7 @@ namespace RetrancaFormat.Properties {
   <string>NC</string>
   <string>GB</string>
   <string>TVTEM</string>
+  <string xsi:nil=""true"" />
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection ListaRetirar {
             get {

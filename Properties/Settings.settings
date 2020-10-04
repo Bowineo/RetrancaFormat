@@ -12,6 +12,7 @@
   &lt;string&gt;NC&lt;/string&gt;
   &lt;string&gt;GB&lt;/string&gt;
   &lt;string&gt;TVTEM&lt;/string&gt;
+  &lt;string xsi:nil="true" /&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>

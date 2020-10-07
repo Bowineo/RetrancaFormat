@@ -128,8 +128,11 @@
             this.tbInputTexto.Size = new System.Drawing.Size(350, 335);
             this.tbInputTexto.TabIndex = 1;
             this.tbInputTexto.WordWrap = false;
+            this.tbInputTexto.Click += new System.EventHandler(this.TbInputTexto_Click);
             this.tbInputTexto.TextChanged += new System.EventHandler(this.TbInputTexto_TextChanged);
             this.tbInputTexto.DoubleClick += new System.EventHandler(this.TbInputTexto_DoubleClick);
+            this.tbInputTexto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbInputTexto_KeyPress);
+            this.tbInputTexto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbInputTexto_KeyUp);
             // 
             // btnGravarArquivo
             // 

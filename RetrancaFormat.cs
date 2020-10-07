@@ -12,6 +12,9 @@ namespace RetrancaFormat
         { InitializeComponent(); }
 
         public bool PrimeiroChar = true;
+        public bool chk;
+        int Position;
+        int PositionAtual;
 
         #region Eventos
         private void BtnEscolhePath_Click(object sender, EventArgs e)
@@ -41,22 +44,24 @@ namespace RetrancaFormat
 
         private void TbInputTexto_TextChanged(object sender, EventArgs e)
         {
-            if (tbInputTexto.Text != "" && tbInputTexto.Text.Trim().Length > 0)
+            if (chk)
             {
-                tbInputTexto.Text = RemoveLinhas(ReitarItensListados(GetNomes(tbInputTexto.Text), Properties.Settings.Default.ListaRetirar), tbInputTexto.SelectedText);
-
-                if (LinhaTexto(GetNomes(tbInputTexto.Text), tbInputTexto.SelectedText).EndsWith("_") && !PrimeiroChar)
-                { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
-
-                btnGravarArquivo.Enabled = true;
+                PositionIgualPositionFinal();
+                if (tbInputTexto.Text != "" && tbInputTexto.Text.Trim().Length > 0)
+                {
+                    tbInputTexto.Text = RemoveLinhas(ReitarItensListados(GetNomes(tbInputTexto.Text), Properties.Settings.Default.ListaRetirar), tbInputTexto.SelectedText);
+                    if (LinhaTexto(GetNomes(tbInputTexto.Text), tbInputTexto.SelectedText).EndsWith("_") && !PrimeiroChar)
+                    { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
+                    btnGravarArquivo.Enabled = true;
+                }
+                else { btnGravarArquivo.Enabled = false; }
+                if (PrimeiroChar && tbInputTexto.Text.Trim().Length <= 1)
+                {
+                    tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0);
+                    PrimeiroChar = false;
+                }
+                if (tbInputTexto.Text == "") { PrimeiroChar = true; }
             }
-            else { btnGravarArquivo.Enabled = false; }
-            if (PrimeiroChar && tbInputTexto.Text.Trim().Length <= 1)
-            {
-                tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0);
-                PrimeiroChar = false;
-            }
-            if (tbInputTexto.Text == "") { PrimeiroChar = true; }
         }
 
         private void RetrancaFormat_Load(object sender, EventArgs e)
@@ -83,6 +88,23 @@ namespace RetrancaFormat
 
         private void BtnExpande_Click(object sender, EventArgs e)
         { Expandir(); }
+
+        private void TbInputTexto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                if (Position == PositionAtual) { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
+                chk = false;
+            }
+            else { chk = true; }
+        }
+
+        private void TbInputTexto_KeyUp(object sender, KeyEventArgs e)
+        { PositionCursor(); }
+
+        private void TbInputTexto_Click(object sender, EventArgs e)
+        { PositionCursor(); }
+
         #endregion
 
         #region Funções
@@ -124,17 +146,19 @@ namespace RetrancaFormat
             return saida;
         }
 
-        public string[] GetNomes(string entrada)
+        public static string[] GetNomes(string entrada)
         {
             string[] str = entrada.Split('\r');
             for (int i = 0; i < str.Length; i++)
-            { str[i] = RemoveSpecialCharacters(str[i].Replace("\n", "")); }
+            {
+                str[i] = RemoveSpecialCharacters(str[i].Replace("\n", ""));
+            }
             str = RetiraNomesInicio(str);
             str = SeparaBlocos(str);
             return str;
         }
 
-        public string[] GetNome(string entrada)
+        public static string[] GetNome(string entrada)
         {
             string[] str = entrada.ToUpper().Split('\r');
             for (int i = 0; i < str.Length; i++)
@@ -237,7 +261,16 @@ namespace RetrancaFormat
         {
             String[] linhas = entrada;
             System.Collections.ArrayList lista = new System.Collections.ArrayList(linhas);
-            return linhas[lista.IndexOf(select)];
+
+            if (lista.IndexOf(select) >= 0)
+            {
+                return linhas[lista.IndexOf(select)];
+            }
+            else
+            {
+                return linhas[0];
+            }
+
         }
 
         public string RemoveLinhas(string[] lines, string TextSelecionado)
@@ -248,9 +281,18 @@ namespace RetrancaFormat
             {
                 lista.RemoveAt(lista.IndexOf(TextSelecionado));
                 linhas = (System.String[])lista.ToArray(Type.GetType("System.String"));
+
+
+
                 return ArrayToString(linhas);
             }
-            else { return ArrayToString(linhas); }
+            else
+            {
+
+
+
+                return ArrayToString(linhas);
+            }
         }
 
         public void GetNomeProduto()
@@ -263,7 +305,7 @@ namespace RetrancaFormat
             tbPrefixo.Text = produto + DateTime.Now.ToString("_dd_MM");
         }
 
-        public string RemoveSpecialCharacters(string text)
+        public static string RemoveSpecialCharacters(string text)
         {
             string ret;
             text = text.Replace("/", "_").Replace("-", "_").Replace("+", "_").Replace("(", "_").Replace(")", "_").Replace("_", " ");
@@ -353,6 +395,22 @@ namespace RetrancaFormat
             }
             return lista.ToArray();
         }
+
+
+        public void PositionCursor()
+        {
+            Position = tbInputTexto.Text.Trim().Length;
+            PositionAtual = tbInputTexto.SelectionStart;
+        }
+
+        public void PositionIgualPositionFinal()
+        {
+            PositionCursor();
+            if (Position <= PositionAtual) { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
+            else { tbInputTexto.Select(PositionAtual, 0); }
+        }
+
         #endregion
+
     }
 }

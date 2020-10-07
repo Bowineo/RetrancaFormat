@@ -17,3 +17,4 @@ C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csproj
 C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csproj.CoreCompileInputs.cache
 C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.exe
 C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.pdb
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Debug\RetrancaFormat.csprojAssemblyReference.cache

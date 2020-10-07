@@ -1,0 +1,10 @@
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Release\RetrancaFormat.exe.config
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Release\RetrancaFormat.exe
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\bin\Release\RetrancaFormat.pdb
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Release\RetrancaFormat.csprojAssemblyReference.cache
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Release\RetrancaFormat.RetrancaFormat.resources
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Release\RetrancaFormat.Properties.Resources.resources
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Release\RetrancaFormat.csproj.GenerateResource.cache
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Release\RetrancaFormat.csproj.CoreCompileInputs.cache
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Release\RetrancaFormat.exe
+C:\Users\Pedro\Documents\Projects\RetrancaFormat\obj\Release\RetrancaFormat.pdb

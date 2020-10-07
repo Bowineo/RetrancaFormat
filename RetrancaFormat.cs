@@ -10,11 +10,10 @@ namespace RetrancaFormat
     {
         public RetrancaFormat()
         { InitializeComponent(); }
-
         public bool PrimeiroChar = true;
-        public bool chk;
-        int Position;
-        int PositionAtual;
+        public bool TeclaEnter;
+        int TotalChar;
+        int AtualChar;
 
         #region Eventos
         private void BtnEscolhePath_Click(object sender, EventArgs e)
@@ -29,22 +28,17 @@ namespace RetrancaFormat
         }
 
         private void BtnGravarArquivo_Click(object sender, EventArgs e)
-        {
-            Gravar(Concatenar(GetNomes(tbInputTexto.Text), tbPrefixo.Text, tbSufixo.Text), tbPathEscolhido.Text);
-        }
+        { Gravar(Concatenar(GetNomes(tbInputTexto.Text), tbPrefixo.Text, tbSufixo.Text), tbPathEscolhido.Text); }
 
         private void TbInputTexto_DoubleClick(object sender, EventArgs e)
         {
             if (tbInputTexto.Text != "" && tbInputTexto.Text.Trim().Length > 0)
-            {
-                tbInputTexto.Text = RemoveLinhas(GetNomes(tbInputTexto.Text), tbInputTexto.SelectedText);
-            }
-
+            { tbInputTexto.Text = RemoveLinhas(GetNomes(tbInputTexto.Text), tbInputTexto.SelectedText); }
         }
 
         private void TbInputTexto_TextChanged(object sender, EventArgs e)
         {
-            if (chk)
+            if (TeclaEnter)
             {
                 PositionIgualPositionFinal();
                 if (tbInputTexto.Text != "" && tbInputTexto.Text.Trim().Length > 0)
@@ -93,10 +87,10 @@ namespace RetrancaFormat
         {
             if (e.KeyChar == 13)
             {
-                if (Position == PositionAtual) { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
-                chk = false;
+                if (TotalChar == AtualChar) { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
+                TeclaEnter = false;
             }
-            else { chk = true; }
+            else { TeclaEnter = true; }
         }
 
         private void TbInputTexto_KeyUp(object sender, KeyEventArgs e)
@@ -150,9 +144,7 @@ namespace RetrancaFormat
         {
             string[] str = entrada.Split('\r');
             for (int i = 0; i < str.Length; i++)
-            {
-                str[i] = RemoveSpecialCharacters(str[i].Replace("\n", ""));
-            }
+            { str[i] = RemoveSpecialCharacters(str[i].Replace("\n", "")); }
             str = RetiraNomesInicio(str);
             str = SeparaBlocos(str);
             return str;
@@ -184,19 +176,10 @@ namespace RetrancaFormat
             {
                 for (int i = 0; i < str.Length; i++)
                 {
-
                     if (str[i] != "")
                     {
-                        if (str[i].ToUpper().Contains("BLOCO"))
-                        {
-                            str[i] = str[i];
-                        }
-                        else
-                        {
-                            str[i] = (str[i] + "_" + sufixo);
-                        }
-
-
+                        if (str[i].ToUpper().Contains("BLOCO")) { str[i] = str[i]; }
+                        else { str[i] = (str[i] + "_" + sufixo); }
                     }
                 }
             }
@@ -206,14 +189,8 @@ namespace RetrancaFormat
                 {
                     if (str[i] != "")
                     {
-                        if (str[i].ToUpper().Contains("BLOCO"))
-                        {
-                            str[i] = str[i];
-                        }
-                        else
-                        {
-                            str[i] = (prefixo + "_" + str[i] + "_" + sufixo);
-                        }
+                        if (str[i].ToUpper().Contains("BLOCO")) { str[i] = str[i]; }
+                        else { str[i] = (prefixo + "_" + str[i] + "_" + sufixo); }
                     }
                 }
             }
@@ -232,7 +209,7 @@ namespace RetrancaFormat
                     {
                         foreach (string linha in TextoGravar)
                         { strW.Write(ReduzUnderline(linha) + "\r\n"); }
-                        strW.Close();
+                        // strW.Close();
                         MessageBox.Show("Concluído!");
                         tbInputTexto.Text = "";
                         btnGravarArquivo.Enabled = false;
@@ -251,26 +228,15 @@ namespace RetrancaFormat
                     else { MessageBox.Show("Input de texto está vazio!"); }
                 }
             }
-            catch (Exception e)
-            {
-                MessageBox.Show("Erro ao gravar arquivo" + e.ToString());
-            }
+            catch (Exception e) { MessageBox.Show("Erro ao gravar arquivo" + e.ToString()); }
         }
 
         public string LinhaTexto(string[] entrada, string select)
         {
             String[] linhas = entrada;
             System.Collections.ArrayList lista = new System.Collections.ArrayList(linhas);
-
-            if (lista.IndexOf(select) >= 0)
-            {
-                return linhas[lista.IndexOf(select)];
-            }
-            else
-            {
-                return linhas[0];
-            }
-
+            if (lista.IndexOf(select) >= 0) { return linhas[lista.IndexOf(select)]; }
+            else { return linhas[0]; }
         }
 
         public string RemoveLinhas(string[] lines, string TextSelecionado)
@@ -281,18 +247,9 @@ namespace RetrancaFormat
             {
                 lista.RemoveAt(lista.IndexOf(TextSelecionado));
                 linhas = (System.String[])lista.ToArray(Type.GetType("System.String"));
-
-
-
                 return ArrayToString(linhas);
             }
-            else
-            {
-
-
-
-                return ArrayToString(linhas);
-            }
+            else { return ArrayToString(linhas); }
         }
 
         public void GetNomeProduto()
@@ -318,8 +275,7 @@ namespace RetrancaFormat
         {
             string comAcentos = "ÄÅÁÂÀÃäáâàãÉÊËÈéêëèÍÎÏÌíîïìÖÓÔÒÕöóôòõÜÚÛüúûùÇç";
             string semAcentos = "AAAAAAaaaaaEEEEeeeeIIIIiiiiOOOOOoooooUUUuuuuCc";
-            for (int i = 0; i < comAcentos.Length; i++)
-            { texto = texto.Replace(comAcentos[i].ToString(), semAcentos[i].ToString()); }
+            for (int i = 0; i < comAcentos.Length; i++) { texto = texto.Replace(comAcentos[i].ToString(), semAcentos[i].ToString()); }
             return texto;
         }
 
@@ -329,20 +285,14 @@ namespace RetrancaFormat
             for (int i = 0; i < texto.Length; i++)
             {
                 if (texto[i].ToUpper().Contains("COMERCIAL") || texto[i].ToUpper().Contains("BLOCO"))
-                {
-                    NumeroBloco++;
-                    texto[i] = "BLOCO" + "_" + NumeroBloco.ToString();
-                }
+                { NumeroBloco++; texto[i] = "BLOCO" + "_" + NumeroBloco.ToString(); }
             }
             return texto;
         }
 
         public static string ReduzUnderline(string texto)
         {
-            while (texto.Contains("__"))
-            {
-                texto = texto.Replace("__", "_");
-            }
+            while (texto.Contains("__")) { texto = texto.Replace("__", "_"); }
             return texto;
         }
 
@@ -350,14 +300,8 @@ namespace RetrancaFormat
         {
             for (int i = 0; i < entrada.Length; i++)
             {
-                while (entrada[i].EndsWith("_"))
-                {
-                    entrada[i] = entrada[i].Substring(0, entrada[i].Length - 1);
-                }
-                while (entrada[i].StartsWith("_"))
-                {
-                    entrada[i] = entrada[i].Substring(1, entrada[i].Length - 1);
-                }
+                while (entrada[i].EndsWith("_")) { entrada[i] = entrada[i].Substring(0, entrada[i].Length - 1); }
+                while (entrada[i].StartsWith("_")) { entrada[i] = entrada[i].Substring(1, entrada[i].Length - 1); }
             }
             return entrada;
         }
@@ -369,19 +313,12 @@ namespace RetrancaFormat
                 if (entrada[i].Length >= 4)
                 {
                     if (entrada[i].Substring(0, 3) == "PE_" || entrada[i].Substring(0, 4) == "PASS" || entrada[i].Substring(0, 4) == "OSVA")
-                    {
-                        entrada[i] = "";
-                    }
+                    { entrada[i] = ""; }
                     if (entrada[i].Length >= 5 && entrada[i].Substring(0, 5) == "CHAMA")
-                    {
-                        entrada[i] = "";
-                    }
+                    { entrada[i] = ""; }
                     if (entrada[i].Length >= 7 && (entrada[i].Substring(0, 7) == "OSVALDO" || entrada[i].Substring(0, 7) == "ESPORTE" || entrada[i].Substring(0, 7) == "VINHETA"))
-                    {
-                        entrada[i] = "";
-                    }
+                    { entrada[i] = ""; }
                 }
-
             }
             return entrada;
         }
@@ -389,25 +326,21 @@ namespace RetrancaFormat
         public static string[] RetiraLinhasVazias(string[] entrada)
         {
             List<string> lista = new List<string>();
-            for (int i = 0; i < entrada.Length; i++)
-            {
-                if (entrada[i] != "") { lista.Add(entrada[i]); }
-            }
+            for (int i = 0; i < entrada.Length; i++) { if (entrada[i] != "") { lista.Add(entrada[i]); } }
             return lista.ToArray();
         }
 
-
         public void PositionCursor()
         {
-            Position = tbInputTexto.Text.Trim().Length;
-            PositionAtual = tbInputTexto.SelectionStart;
+            TotalChar = tbInputTexto.Text.Trim().Length;
+            AtualChar = tbInputTexto.SelectionStart;
         }
 
         public void PositionIgualPositionFinal()
         {
             PositionCursor();
-            if (Position <= PositionAtual) { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
-            else { tbInputTexto.Select(PositionAtual, 0); }
+            if (TotalChar <= AtualChar) { tbInputTexto.Select(tbInputTexto.Text.Trim().Length, 0); }
+            else { tbInputTexto.Select(AtualChar, 0); }
         }
 
         #endregion
